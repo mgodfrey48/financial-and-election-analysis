@@ -4,11 +4,15 @@ import os
 # import module to read csv files
 import csv
 
-# create file path
-file_path = os.path.join("Resources", "budget_data.csv")
+# import module to write txt file
+import sys
+
+# create file paths for the csv file and output.txt
+budget_file_path = os.path.join("Resources", "budget_data.csv")
+output_file_path = os.path.join("analysis", "output.txt")
 
 # read the csv file
-with open(file_path, 'r') as csvfile:
+with open(budget_file_path, 'r') as csvfile:
     
     # create the csv reader
     csvreader = csv.reader(csvfile, delimiter=',')
@@ -61,7 +65,7 @@ with open(file_path, 'r') as csvfile:
     # calculate the average change
     average_change = round(total_of_changes/month_count, 2)
 
-    # print the summary table
+    # print the summary table in terminal
     print('Financial Analysis')
     print('--------------------------------------')
     print(f'Total Months: {month_count}')
@@ -70,6 +74,13 @@ with open(file_path, 'r') as csvfile:
     print(f'Greatest Increase in Profits: {best_month} (${greatest_increase})')
     print(f'Greatest Decrease in Profits: {worst_month} (${greatest_decrease})')
 
-
-
-
+    # print the summary table in the output.txt file (sys.stdout found from a google search and explanation from kite.com)
+    sys.stdout = open(output_file_path, 'w')
+    print('Financial Analysis')
+    print('--------------------------------------')
+    print(f'Total Months: {month_count}')
+    print(f'Total: ${net_profit}')
+    print(f'Average Change: ${average_change}')
+    print(f'Greatest Increase in Profits: {best_month} (${greatest_increase})')
+    print(f'Greatest Decrease in Profits: {worst_month} (${greatest_decrease})')
+    sys.stdout.close()
