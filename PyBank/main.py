@@ -20,7 +20,7 @@ with open(file_path, 'r') as csvfile:
     month_count = 0
     net_profit = 0
     previous_change = 0
-    total_changes = 0
+    total_of_changes = 0
     average_change = 0
     greatest_increase = 0
     best_month = ''
@@ -40,32 +40,35 @@ with open(file_path, 'r') as csvfile:
         # add to the net profit/loss
         net_profit += current_change
     
-        # calculate different between current month's change and the preivous month's change
-        # append it to the list of changes
+        # calculate the difference between current month's change and the previous month's change
+        # add the monthly change to the total of monthly changes
         monthly_change = current_change - previous_change
-        total_changes += monthly_change
+        total_of_changes += monthly_change
 
+        # set the current change to be the previous_change for the next row
         previous_change = current_change
 
-        # greatest increase in profits
+        # store the greatest increase in profits and the month associated with it
         if current_change > greatest_increase:
             greatest_increase = current_change
             best_month = current_month
         
-        # greatest decrease in profits
+        # store the greatest decrease in profits and the month associated with it
         if current_change < greatest_decrease:
             greatest_decrease = current_change
             worst_month = current_month
 
     # calculate the average change
-    average_change = round(total_changes/month_count, 2)
+    average_change = round(total_of_changes/month_count, 2)
 
     # print the summary table
+    print('Financial Analysis')
+    print('--------------------------------------')
     print(f'Total Months: {month_count}')
     print(f'Total: ${net_profit}')
     print(f'Average Change: ${average_change}')
     print(f'Greatest Increase in Profits: {best_month} (${greatest_increase})')
-    print(f'Greates Decrease in Profits: {worst_month} (${greatest_decrease})')
+    print(f'Greatest Decrease in Profits: {worst_month} (${greatest_decrease})')
 
 
 
