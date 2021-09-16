@@ -4,9 +4,6 @@ import os
 # import module to read csv files
 import csv
 
-# import module to write txt file
-import sys
-
 # create file paths for the csv file and output.txt
 budget_file_path = os.path.join("Resources", "budget_data.csv")
 output_file_path = os.path.join("analysis", "output.txt")
@@ -75,12 +72,11 @@ with open(budget_file_path, 'r') as csvfile:
     print(f'Greatest Decrease in Profits: {worst_month} (${greatest_decrease})')
 
     # print the summary table in the output.txt file (sys.stdout found from a google search and explanation from kite.com)
-    sys.stdout = open(output_file_path, 'w')
-    print('Financial Analysis')
-    print('--------------------------------------')
-    print(f'Total Months: {month_count}')
-    print(f'Total: ${net_profit}')
-    print(f'Average Change: ${average_change}')
-    print(f'Greatest Increase in Profits: {best_month} (${greatest_increase})')
-    print(f'Greatest Decrease in Profits: {worst_month} (${greatest_decrease})')
-    sys.stdout.close()
+    with open(output_file_path, 'w') as txtwriter:
+        txtwriter.write('Financial Analysis\n')
+        txtwriter.write('--------------------------------------\n')
+        txtwriter.write(f'Total Months: {month_count}\n')
+        txtwriter.write(f'Total: ${net_profit}\n')
+        txtwriter.write(f'Average Change: ${average_change}\n')
+        txtwriter.write(f'Greatest Increase in Profits: {best_month} (${greatest_increase})\n')
+        txtwriter.write(f'Greatest Decrease in Profits: {worst_month} (${greatest_decrease})\n')

@@ -4,8 +4,12 @@ import os
 # import module to read csv file
 import csv
 
-# create file path for csv file
+# import module to write the txt file with our results
+#import sys
+
+# create file paths for the csv file to read, and the output file for the results
 election_file_path = os.path.join('Resources', 'election_data.csv')
+output_file_path = os.path.join("analysis", "output.txt")
 
 # open up the election data csv file
 with open(election_file_path, 'r') as csvfile:
@@ -23,20 +27,20 @@ with open(election_file_path, 'r') as csvfile:
     # read through each row of the data
     for row in csvreader:
 
-        # store the candidate voted for
-        voted_for = row[2]
+        # store the current vote
+        current_vote = row[2]
 
         # add to total vote count
         total_votes += 1
 
         # check to see if the candidate voted for is already in the dictionary
         # if so, add 1 to the count for that candidate
-        if voted_for in candidate_vote_counts:
-            candidate_vote_counts[voted_for] += 1
+        if current_vote in candidate_vote_counts:
+            candidate_vote_counts[current_vote] += 1
         
-        # if not, add the new candidate to the dictionary and set there count equal to 1 
+        # if not, add the new candidate to the dictionary and set their count equal to 1 
         else:
-            candidate_vote_counts[voted_for] = 1
+            candidate_vote_counts[current_vote] = 1
     
     # create a dictionary to store the percentages of votes each candidate received
     candidate_vote_percentages = {}
@@ -55,7 +59,7 @@ with open(election_file_path, 'r') as csvfile:
             winning_vote_count = value
             election_winner = key
     
-    # print results
+    # print results in the terminal
     print('Election Results')
     print('-------------------------------')
     print(f'Total Votes: {total_votes}')
@@ -65,3 +69,15 @@ with open(election_file_path, 'r') as csvfile:
     print('-------------------------------')
     print(f'Winner: {election_winner}')
     print('-------------------------------')
+
+    # print the results in the output.txt file
+    with open(output_file_path, 'w') as txtwriter:
+        txtwriter.write('Election Results\n')
+        txtwriter.write('-------------------------------\n')
+        txtwriter.write(f'Total Votes: {total_votes}\n')
+        txtwriter.write('-------------------------------\n')
+        for key in candidate_vote_percentages:
+            txtwriter.write(f'{key}: {candidate_vote_percentages[key]} ({candidate_vote_counts[key]})\n')
+        txtwriter.write('-------------------------------\n')
+        txtwriter.write(f'Winner: {election_winner}\n')
+        txtwriter.write('-------------------------------\n')
