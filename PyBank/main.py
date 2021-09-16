@@ -31,13 +31,13 @@ with open(budget_file_path, 'r') as csvfile:
     greatest_decrease = 0
     worst_month = ''
 
-    # loop through the csv file an make calculations over the entire dataset/year
+    # loop through the csv file and make calculations over the entire dataset/year
     for row in csvreader:
        
         # add to the month count
         month_count += 1
         
-        # set the current month and change variables
+        # set the current month and profit/loss change variables
         current_change = int(row[1])
         current_month = str(row[0])
         
