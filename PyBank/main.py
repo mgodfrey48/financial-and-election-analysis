@@ -17,7 +17,7 @@ with open(budget_file_path, 'r') as csvfile:
     # remove/store the header
     csv_header = next(csvreader)
     
-    # define variables for calculations
+    # define variables for calculations and results storage
     month_count = 0
     net_profit = 0
     previous_change = 0
@@ -41,7 +41,7 @@ with open(budget_file_path, 'r') as csvfile:
         # add to the net profit/loss
         net_profit += current_change
     
-        # calculate the difference between current month's change and the previous month's change
+        # calculate the difference between the current month's change and the previous month's change
         # add the monthly change to the total of monthly changes
         monthly_change = current_change - previous_change
         total_of_changes += monthly_change
@@ -71,7 +71,7 @@ with open(budget_file_path, 'r') as csvfile:
     print(f'Greatest Increase in Profits: {best_month} (${greatest_increase})')
     print(f'Greatest Decrease in Profits: {worst_month} (${greatest_decrease})')
 
-    # print the summary table in the output.txt file (sys.stdout found from a google search and explanation from kite.com)
+    # print the summary table in the output.txt file
     with open(output_file_path, 'w') as txtwriter:
         txtwriter.write('Financial Analysis\n')
         txtwriter.write('--------------------------------------\n')

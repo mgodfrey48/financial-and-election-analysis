@@ -4,9 +4,6 @@ import os
 # import module to read csv file
 import csv
 
-# import module to write the txt file with our results
-#import sys
-
 # create file paths for the csv file to read, and the output file for the results
 election_file_path = os.path.join('Resources', 'election_data.csv')
 output_file_path = os.path.join("analysis", "output.txt")
@@ -30,15 +27,15 @@ with open(election_file_path, 'r') as csvfile:
         # store the current vote
         current_vote = row[2]
 
-        # add to total vote count
+        # add to the total vote count
         total_votes += 1
 
         # check to see if the candidate voted for is already in the dictionary
-        # if so, add 1 to the count for that candidate
+        # if so, add 1 to the vote count for that candidate
         if current_vote in candidate_vote_counts:
             candidate_vote_counts[current_vote] += 1
         
-        # if not, add the new candidate to the dictionary and set their count equal to 1 
+        # if not, add the new candidate to the dictionary and set their vote count equal to 1 
         else:
             candidate_vote_counts[current_vote] = 1
     
@@ -47,9 +44,9 @@ with open(election_file_path, 'r') as csvfile:
 
     # calculate percentages of votes each candidate got, store results in voting percentage dictionary
     for key in candidate_vote_counts:
-        candidate_vote_percentages[key] = '{:.3%}'.format(candidate_vote_counts[key]/total_votes) #this format function was found using stack overflow
+        candidate_vote_percentages[key] = '{:.3%}'.format(candidate_vote_counts[key]/total_votes) #this format function was found on stack overflow
 
-    # define values to determine and store the winner of the election
+    # define variables to determine and store the winner of the election
     winning_vote_count = 0
     election_winner = ''
 
@@ -59,7 +56,7 @@ with open(election_file_path, 'r') as csvfile:
             winning_vote_count = value
             election_winner = key
     
-    # print results in the terminal
+    # print the results in the terminal
     print('Election Results')
     print('-------------------------------')
     print(f'Total Votes: {total_votes}')
