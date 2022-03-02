@@ -1,5 +1,4 @@
-# python-challenge
-This repo contains all files for the python challenge homework assignment due 9/18/21.
+# Analyzing Financial and Election Data
 
 Part 1 - used python to analyze financial data and produce some summary statistics
 
